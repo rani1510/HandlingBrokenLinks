@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class HandlingBrokenLinks{
 		
 		// Initialize Webdriver Object
         WebDriver driver = new ChromeDriver();
-        driver.get("https://demo.guru99.com/test/newtours/");
+        driver.get("https://www.hackerrank.com/");
         
 
     	// Store all link elements (anchor tag elements in html) in a list
@@ -27,7 +28,7 @@ public class HandlingBrokenLinks{
     		WebElement elem=links.get(i);
     		
     		//Printing text of all the links
-     		System.out.println(elem.getText());
+     		//System.out.println(elem.getText());
      		 
     		//Getting url of links
     		String linkUrl = elem.getAttribute("href");
@@ -42,7 +43,7 @@ public class HandlingBrokenLinks{
     	driver.quit();
 	}
 	public static void verifyLinks(String websiteLink) throws IOException  {
-		
+		try {
 		// Create URL object and pass website link 
 		URL url =new URL(websiteLink);
 		
@@ -63,6 +64,12 @@ public class HandlingBrokenLinks{
 
 		// Disconnect URL Connection
 		httpURLConnect.disconnect();
-		
+	} catch (MalformedURLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
 	}
 }
